@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:shift_management}?sslmode=${PGSSLMODE:prefer}
+    url: ${DATABASE_URL:jdbc:postgresql://nozomi.proxy.rlwy.net:27728/railway?sslmode=require}
     username: ${PGUSER:postgres}
-    password: ${PGPASSWORD:postgres}
+    password: ${PGPASSWORD:iMGJcVfddUaRGWFhjGuekOsAzSmCbNVD}
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-timeout: 30000
