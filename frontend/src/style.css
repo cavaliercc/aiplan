@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root {
+  --primary-color: #409eff;
+  --sidebar-width: 240px;
+  --topbar-height: 56px;
+}
+
+body {
+  margin: 0;
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+}
