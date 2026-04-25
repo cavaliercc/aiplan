@@ -6,7 +6,7 @@ import { BarChart } from 'echarts/charts'
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components'
 import VChart from 'vue-echarts'
 import { getKpi, getTrend, getAlerts } from '../api/dashboard'
-import type { DashboardKpiDTO, TrendDataDTO, AlertDTO } from '../api/dashboard'
+import type { DashboardKpiDTO, TrendDataDTO } from '../api/dashboard'
 import { kpiData as mockKpi, weeklyTrend as mockTrend, todayAlerts as mockAlerts } from '../mock/dashboard'
 
 use([CanvasRenderer, BarChart, GridComponent, TooltipComponent, LegendComponent])

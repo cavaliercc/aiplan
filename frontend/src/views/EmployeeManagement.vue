@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { getEmployees } from '../api/employees'
 import type { EmployeeDTO } from '../api/employees'
-import { employees as mockEmployees, departments, statuses } from '../mock/employees'
+import { employees as mockEmployees, statuses } from '../mock/employees'
 
 const loading = ref(false)
 const employees = ref<EmployeeDTO[]>([])
