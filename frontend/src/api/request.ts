@@ -2,8 +2,13 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import router from '../router'
 
+const rawBase = import.meta.env.VITE_API_BASE_URL as string | undefined
+const baseURL = rawBase
+  ? rawBase.endsWith('/api') ? rawBase : `${rawBase.replace(/\/$/, '')}/api`
+  : '/api'
+
 const request = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+  baseURL,
   timeout: 10000,
 })
 
