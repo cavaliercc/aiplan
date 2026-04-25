@@ -20,30 +20,42 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        log.info("[DataInitializer] Waiting 5s for database to be fully ready...");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            log.warn("[DataInitializer] Sleep interrupted, proceeding immediately");
+        }
         initAdminUser();
     }
 
     private void initAdminUser() {
-        User admin = userMapper.selectOne(
-                new LambdaQueryWrapper<User>().eq(User::getUsername, "admin")
-        );
-
-        String encodedPassword = passwordEncoder.encode("admin123");
-
-        if (admin == null) {
-            User newAdmin = new User();
-            newAdmin.setUsername("admin");
-            newAdmin.setPassword(encodedPassword);
-            newAdmin.setRole("ADMIN");
-            userMapper.insert(newAdmin);
-            log.info("Admin user created");
-        } else {
-            userMapper.update(null,
-                    new LambdaUpdateWrapper<User>()
-                            .eq(User::getUsername, "admin")
-                            .set(User::getPassword, encodedPassword)
+        log.info("[DataInitializer] Starting admin user initialization...");
+        try {
+            User admin = userMapper.selectOne(
+                    new LambdaQueryWrapper<User>().eq(User::getUsername, "admin")
             );
-            log.info("Admin password reset to admin123");
+
+            String encodedPassword = passwordEncoder.encode("admin123");
+
+            if (admin == null) {
+                User newAdmin = new User();
+                newAdmin.setUsername("admin");
+                newAdmin.setPassword(encodedPassword);
+                newAdmin.setRole("ADMIN");
+                userMapper.insert(newAdmin);
+                log.info("[DataInitializer] Admin user created successfully");
+            } else {
+                userMapper.update(null,
+                        new LambdaUpdateWrapper<User>()
+                                .eq(User::getUsername, "admin")
+                                .set(User::getPassword, encodedPassword)
+                );
+                log.info("[DataInitializer] Admin password reset to admin123");
+            }
+        } catch (Exception e) {
+            log.error("[DataInitializer] Failed to initialize admin user, app will continue running: {}", e.getMessage(), e);
         }
     }
 }
