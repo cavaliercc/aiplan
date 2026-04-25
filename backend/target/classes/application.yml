@@ -3,10 +3,14 @@ server:
 
 spring:
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/shift_management}
-    username: ${DATABASE_USERNAME:postgres}
-    password: ${DATABASE_PASSWORD:postgres}
+    url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:shift_management}
+    username: ${PGUSER:${DATABASE_USERNAME:postgres}}
+    password: ${PGPASSWORD:${DATABASE_PASSWORD:postgres}}
     driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    locations: classpath:db
+    baseline-on-migrate: true
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
