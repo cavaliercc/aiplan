@@ -4,7 +4,6 @@
 [build]
 builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
-workdir = "backend"
 
 [deploy]
 startCommand = "java -jar app.jar"
