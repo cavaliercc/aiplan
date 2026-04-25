@@ -3,13 +3,15 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:shift_management}?sslmode=${PGSSLMODE:require}
+    url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:shift_management}?sslmode=${PGSSLMODE:prefer}
     username: ${PGUSER:postgres}
     password: ${PGPASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-timeout: 30000
-      initialization-fail-timeout: 1
+      initialization-fail-timeout: 60000
+      maximum-pool-size: 5
+      minimum-idle: 1
   flyway:
     enabled: false
 
